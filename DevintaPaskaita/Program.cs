@@ -34,16 +34,25 @@ Kiekviena sąskaita turi turėti pradinį balansą.
         {
             List<Saskaita> saskaitos = new List<Saskaita>()
             {
+                new Saskaita("Klaidas", 50),
                 new DebetoSaskaita("Klaidas", 85),
                 new KreditoSaskaita("Klaidas", 75)
             };
 
             double[] kainos = { 10, 20, 30 };
 
-            Saskaita debeto = saskaitos[0];
-            Saskaita kredito = saskaitos[1];
+            Saskaita main = saskaitos[0];
+            Saskaita debeto = saskaitos[1];
+            Saskaita kredito = saskaitos[2];
 
-            foreach(int kaina in kainos)
+
+            foreach (int kaina in kainos)
+            {
+                Console.WriteLine($"Vygdomas mokejimas siai sumai {kaina} is main saskaitos.");
+                VykdytiMokejimus(main, kaina);
+            }
+
+            foreach (int kaina in kainos)
             {
                 Console.WriteLine($"Vygdomas mokejimas siai sumai {kaina} is debeto saskaitos.");
                 VykdytiMokejimus(debeto, kaina);

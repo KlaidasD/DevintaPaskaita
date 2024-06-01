@@ -5,29 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevintaPaskaita.Models
-{
-    /*Klasėje Atostogos įgyvendinkite šiuos metodus:
+
+/*Klasėje Atostogos įgyvendinkite šiuos metodus:
 UzsakytiKelione(string kryptis, int dienuSk) : nustato kelionės kryptį ir dienų skaičių.Bazinė kaina turi būti padauginta iš dienų skaičiaus ir pridedamas papildomas mokestis už atostogas (pvz., 50 €).
 GautiKelionesKaina() : grąžina galutinę kelionės kainą, įskaitant papildomą mokestį.*/
+namespace DevintaPaskaita.Models
+{
     public class Atostogos : Kelione, IKelionesUzsakymas
     {
+        public Atostogos(string kryptis, int dienuSkaicius, double bazineKaina) : base(kryptis, dienuSkaicius, bazineKaina) { }
 
-        public Atostogos(string aKryptis, int aDienuSkaicius, double aBazinesKainos)
+        public override double GautiKelionesKaina()
         {
-            Kryptis = aKryptis;
-            DienuSkaicius = aDienuSkaicius;
-            BazinesKainos = aBazinesKainos;
+            return base.GautiKelionesKaina() + 50;
         }
 
-        public double GautiKelionesKaina()
+        public void UzsakytiKelione(string kryptis, int dienuSkaicius)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UzsakytiKelione(string kryptis, int dienuSk)
-        {
-            throw new NotImplementedException();
+            Kryptis = kryptis;
+            DienuSkaicius = dienuSkaicius;
         }
     }
 }

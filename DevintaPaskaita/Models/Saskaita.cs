@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevintaPaskaita.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ Naudodami ciklą iteruokite per šį sąrašą ir išbandykite įvairius mokėji
 Papildomi reikalavimai:
 Kiekviena sąskaita turi turėti pradinį balansą.
         */
-    public class Saskaita
+    public class Saskaita : IMokejimoMetodas
     {
         public string SavininkoVardas;
         protected double Balansas;
@@ -48,6 +49,24 @@ Kiekviena sąskaita turi turėti pradinį balansą.
         public double GautiBalansa()
         {
             return Balansas;
+        }
+
+        public void Apmoketi(double suma)
+        {
+            if (PatikrintiLikuti(suma))
+            {
+                Balansas -= suma;
+                Console.WriteLine($"Mokejimas sekmingas. Naujas balansas: {Balansas}");
+            }
+            else
+            {
+                Console.WriteLine("Nepakanka lesu.");
+            }
+        }
+
+        public bool PatikrintiLikuti(double suma)
+        {
+            return Balansas >= suma;
         }
     }
 }

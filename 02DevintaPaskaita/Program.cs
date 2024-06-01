@@ -36,78 +36,21 @@ Papildomi reikalavimai:
 Kiekviena kelionė turi turėti pradinę bazinę kainą (pvz., 100 € už dieną).
 Pridėkite galimybę rodyti visas užsakytas keliones ir jų detales.*/
 
-using DevintaPaskaita.Models;
+using DevintaPaskaita.Services;
 using DevintaPaskaita.Contracts;
 using DevintaPaskaita.Models;
+using DevintaPaskaita.Services;
 using System;
-using System.ComponentModel;
 
 namespace DevintaPaskaita
 {
-    public class Program : Kelione
+    public class Program
     {
         public static void Main(string[] args)
         {
-            while(true)
-            {
-                Console.WriteLine("Programos funkcionalumas: " +
-                    "\n1.Prideti kelione." +
-                    "\n2.Rodyti visas keliones." +
-                    "\n3.Uzsakyti kelione." +
-                    "\n4.Rodyti visas uzsakytas keliones." +
-                    "\n5.Uzdaryti programa.");
-
-                int ivestis;
-                if(!int.TryParse(Console.ReadLine(), out ivestis) )
-                {
-                    Console.WriteLine("Netinkama ivestis.");
-                }
-                switch(ivestis)
-                {
-                    case 1:
-                        Kelione kelione = SukurtiKelione();
-                        if (kelione != null)
-                        {
-                            KelioniuAgentura.PridetiKelione(kelione);
-                            Console.WriteLine("Kelione sekmingai prideta.");
-                        }
-                        break;
-                    case 2:
-                        KelioniuAgentura.RodytiVisasKeliones();
-                        break;
-                    case 3:
-                        KelioniuAgentura.UzsakytiKelione();
-                        break;
-                    case 4:
-                        KelioniuAgentura.RodytiVisasUzsakytasKeliones();
-                        break;
-                    case 5:
-                        Console.WriteLine("Isjungiama programa.");
-                        Environment.Exit(0);
-                        break;
-                }
-            }
-        }
-
-        public static Kelione SukurtiKelione()
-        {
-            Console.WriteLine("Iveskite keliones krypti: ");
-            string kryptis = Console.ReadLine();
-            Console.WriteLine("Iveskit keliones trukme dienomis: ");
-            int dSkaicius;
-            if(!int.TryParse(Console.ReadLine(), out dSkaicius))
-            {
-                Console.WriteLine("Netinkamai ivestas dienu skaicius.");
-            }
-            Console.WriteLine("Iveskite keliones dienos kaina: ");
-            double kaina;
-
-            if(!double.TryParse(Console.ReadLine(), out kaina))
-            {
-                Console.WriteLine("Netinkamai ivesta kaina.");
-            }
-
-            return new Kelione(kryptis, dSkaicius, kaina);
+            KelionesUI.Menu();
         }
     }
+
 }
+

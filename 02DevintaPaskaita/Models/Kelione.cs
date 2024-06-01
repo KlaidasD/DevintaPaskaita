@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevintaPaskaita.Models
-{
-    /*Užduoties aprašymas:
+
+/*Užduoties aprašymas:
 Sukurkite tėvinę klasę Kelione, kuri turi šiuos laukus ir metodus:
 Laukai: public string Kryptis, protected int DienuSkaicius, protected double BazinesKainos.
 Metodai: public double GautiBazinesKainos(): grąžina bazinę kelionės kainą.
@@ -21,36 +20,30 @@ Jei kelionės užsakymas sėkmingas, išveskite pranešimą apie sėkmingą užs
 Papildomi reikalavimai:
 Kiekviena kelionė turi turėti pradinę bazinę kainą (pvz., 100 € už dieną).
 Pridėkite galimybę rodyti visas užsakytas keliones ir jų detales.*/
+
+namespace DevintaPaskaita.Models
+{
     public class Kelione
     {
-        public string Kryptis;
-        protected int DienuSkaicius;
-        protected double BazinesKainos;
-        public bool ArUzsakyta;
-        public double Suma;
+        public string Kryptis { get; set; }
+        public int DienuSkaicius { get; set; }
+        public double BazineKaina { get; set; } = 100; // Default base price
 
-        public Kelione(string aKryptis, int aDienuSkaicius, double aBazinesKainos)
+        public Kelione(string kryptis, int dienuSkaicius, double bazineKaina = 100)
         {
-            Kryptis = aKryptis;
-            DienuSkaicius = aDienuSkaicius;
-            BazinesKainos = aBazinesKainos;
-            ArUzsakyta = false;
-            Suma = BazinesKainos * DienuSkaicius;
+            Kryptis = kryptis;
+            DienuSkaicius = dienuSkaicius;
+            BazineKaina = bazineKaina;
         }
 
-        public Kelione()
+        public virtual double GautiKelionesKaina()
         {
-
-        }
-
-        public double GautiBazinesKainos()
-        {
-            return BazinesKainos;
+            return BazineKaina * DienuSkaicius;
         }
 
         public override string ToString()
         {
-            return $"Kryptis: {Kryptis}, Dienu skaicius: {DienuSkaicius}, Bazine kaina: {BazinesKainos}, Viso suma: {Suma}";
+            return $"Kryptis: {Kryptis}, Dienu skaicius: {DienuSkaicius}, Bazine kaina: {BazineKaina}";
         }
     }
 }
